@@ -8,7 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "ip14": "npx react-native run-ios --simulator=\"iPhone 14 Pro\"",
+    "ip14": "npx react-native run-ios --simulator=\"iPhone 14\"",
     "pod": "npx pod-install",
     "android:clean:and:run": "cd android && ./gradlew clean && cd .. && yarn android"
   },

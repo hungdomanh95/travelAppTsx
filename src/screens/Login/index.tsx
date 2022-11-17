@@ -18,6 +18,9 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import GoogleButton from '../../components/GoogleButton';
+import InstaButton from '../../components/InstaButton';
+import FacebookButton from '../../components/FacebookButton';
 
 GoogleSignin.configure({
   webClientId:
@@ -31,53 +34,15 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // const googleSignIn = async () => {
-  //   // try {
-  //   //   await GoogleSignin.hasPlayServices();
-  //   //   const userInfo = await GoogleSignin.signIn();
-  //   //   console.log('userInfo: ', userInfo);
-  //   // } catch (error: any) {
-  //   //   console.log('error: ', error);
-  //   //   if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-  //   //     // user cancelled the login flow
-  //   //   } else if (error.code === statusCodes.IN_PROGRESS) {
-  //   //     // operation (e.g. sign in) is in progress already
-  //   //   } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-  //   //     // play services not available or outdated
-  //   //   } else {
-  //   //     // some other error happened
-  //   //   }
-  //   // }
-  //   await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-  //   // Get the users ID token
-  //   const {idToken,user} = await GoogleSignin.signIn();
-  //   console.log('user: ', user);
-
-  //   // Create a Google credential with the token
-  //   const googleCredential = await auth.GoogleAuthProvider.credential(idToken);
-
-  //   // Sign-in the user with the credential
-  //   const res = await auth().signInWithCredential(googleCredential);
-  //   const accessToken = await (await GoogleSignin.getTokens()).accessToken
-  //   console.log('res: ', res);
-  // };
-
-  // const googleSignOut = async () => {
-  //   auth()
-  //     .signOut()
-  //     .then(() => {
-  //       console.log('User logout success');
-  //     })
-  //     .catch(e => Alert.alert('Error', e.message));
-  // };
-
   const googleSignIn = async () => {
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
     const userInfo = await GoogleSignin.signIn();
     console.log('userInfo: ', userInfo);
 
     // Create a Google credential with the token
-    const googleCredential = await auth.GoogleAuthProvider.credential(userInfo.idToken);
+    const googleCredential = await auth.GoogleAuthProvider.credential(
+      userInfo.idToken,
+    );
     // // Sign-in the user with the credential
     await auth()
       .signInWithCredential(googleCredential)
@@ -147,8 +112,14 @@ const Login = () => {
         Or connect
       </Text>
 
-      <Button content="Google Sign-In" onPress={googleSignIn} />
-      <Button content="Google Sign-Out" onPress={googleSignOut} />
+      <RowView style={styles.containerButtonLogin}>
+        <GoogleButton />
+        <FacebookButton />
+        <InstaButton />
+      </RowView>
+
+      {/* <Button content="Google Sign-In" onPress={googleSignIn} />
+      <Button content="Google Sign-Out" onPress={googleSignOut} /> */}
     </Container>
   );
 };
@@ -165,5 +136,8 @@ const styles = StyleSheet.create({
   },
   btnStyle: {
     marginBottom: 40,
+  },
+  containerButtonLogin: {
+    marginTop: 100,
   },
 });

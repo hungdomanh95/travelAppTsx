@@ -12,6 +12,8 @@ target 'travelAppTsx' do
     :hermes_enabled => false
   )
 
+  # pod 'Firebase/Core', '~> 6.13.0'
+
   target 'travelAppTsxTests' do
     inherit! :complete
     # Pods for testing
